@@ -40,12 +40,11 @@ public class UserControllerTest {
     @Test
     void testCreateUserFailLogin() throws Exception {
         String userJson = """
-                {
-                    "id": 1,
-                    "email": "Halie59@yahoo.com",
-                    "login": "",
-                    "name": "Irma Daugherty",
-                    "birthday": "1995-12-23"
+                {"id": 1,
+                 "email": "Halie59@yahoo.com",
+                 "login": "",
+                 "name": "Irma Daugherty",
+                 "birthday": "1995-12-23"
                 }""";
 
         mockMvc.perform(post("/users")
@@ -57,12 +56,11 @@ public class UserControllerTest {
     @Test
     void testCreateUserFailEmail() throws Exception {
         String userJson = """
-                {
-                    "id": 1,
-                    "email": "Halie59yahoo.com",
-                    "login": "sdfdsfsdf",
-                    "name": "Irma Daugherty",
-                    "birthday": "1995-12-23"
+                {"id": 1,
+                 "email": "Halie59yahoo.com",
+                 "login": "sdfdsfsdf",
+                 "name": "Irma Daugherty",
+                 "birthday": "1995-12-23"
                 }""";
 
         mockMvc.perform(post("/users")
@@ -74,12 +72,11 @@ public class UserControllerTest {
     @Test
     void testCreateUserFailBirthday() throws Exception {
         String userJson = """
-                {
-                    "id": 1,
-                    "email": "Halie59@yahoo.com",
-                    "login": "sdfdsfsdf",
-                    "name": "Irma Daugherty",
-                    "birthday": "2995-12-23"
+                {"id": 1,
+                 "email": "Halie59@yahoo.com",
+                 "login": "sdfdsfsdf",
+                 "name": "Irma Daugherty",
+                 "birthday": "2995-12-23"
                 }""";
 
         mockMvc.perform(post("/users")
@@ -91,21 +88,19 @@ public class UserControllerTest {
     @Test
     void testUpdateUser() throws Exception {
         String userJson = """
-                {
-                    "id": 1,
-                    "email": "Halie59@yahoo.com",
-                    "login": "P7CzhChZFQ",
-                    "name": "Irma Daugherty",
-                    "birthday": "1995-12-23"
+                {"id": 1,
+                 "email": "Halie59@yahoo.com",
+                 "login": "P7CzhChZFQ",
+                 "name": "Irma Daugherty",
+                 "birthday": "1995-12-23"
                 }""";
 
         String userJsonUpdate = """
-                {
-                    "id": 1,
-                    "email": "Halie59@yahoo.com",
-                    "login": "P7CzhChZFQ",
-                    "name": "Irma Daugherty",
-                    "birthday": "1995-12-24"
+                {"id": 1,
+                 "email": "Halie59@yahoo.com",
+                 "login": "P7CzhChZFQ",
+                 "name": "Irma Daugherty",
+                 "birthday": "1995-12-24"
                 }""";
 
         mockMvc.perform(post("/users")
