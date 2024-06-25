@@ -23,13 +23,12 @@ public class FilmControllerTest {
 
     @Test
     void testCreateFilm() throws Exception {
-        String filmJson = """
-                {
-                 "name": "nisi eiusmod",
-                 "description": "adipisicing",
-                 "releaseDate": "1967-03-25",
-                 "duration": 100
-                }""";
+        String filmJson = "{\n" +
+                "  \"name\": \"nisi eiusmod\",\n" +
+                "  \"description\": \"adipisicing\",\n" +
+                "  \"releaseDate\": \"1967-03-25\",\n" +
+                "  \"duration\": 100\n" +
+                "}";
 
         mockMvc.perform(post("/films")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -39,13 +38,12 @@ public class FilmControllerTest {
 
     @Test
     void testCreateFilmFailName() throws Exception {
-        String filmJson = """
-                {
-                  "name": "",
-                  "description": "adipisicing",
-                  "releaseDate": "1967-03-25",
-                  "duration": 100
-                }""";
+        String filmJson = "{\n" +
+                "  \"name\": \"\",\n" +
+                "  \"description\": \"adipisicing\",\n" +
+                "  \"releaseDate\": \"1967-03-25\",\n" +
+                "  \"duration\": 100\n" +
+                "}";
 
         mockMvc.perform(post("/films")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -55,13 +53,12 @@ public class FilmControllerTest {
 
     @Test
     void testCreateUserFailDuration() throws Exception {
-        String filmJson = """
-                {
-                  "name": "nisi eiusmod",
-                  "description": "adipisicing",
-                  "releaseDate": "1967-03-25",
-                  "duration": 0
-                }""";
+        String filmJson = "{\n" +
+                "  \"name\": \"nisi eiusmod\",\n" +
+                "  \"description\": \"adipisicing\",\n" +
+                "  \"releaseDate\": \"1967-03-25\",\n" +
+                "  \"duration\": 0\n" +
+                "}";
 
         mockMvc.perform(post("/films")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -71,13 +68,12 @@ public class FilmControllerTest {
 
     @Test
     void testCreateUserFailReleaseDate() throws Exception {
-        String filmJson = """
-                {
-                  "name": "nisi eiusmod",
-                  "description": "adipisicing",
-                  "releaseDate": "1867-03-25",
-                  "duration": 100
-                }""";
+        String filmJson = "{\n" +
+                "  \"name\": \"nisi eiusmod\",\n" +
+                "  \"description\": \"adipisicing\",\n" +
+                "  \"releaseDate\": \"1867-03-25\",\n" +
+                "  \"duration\": 100\n" +
+                "}";
 
         mockMvc.perform(post("/films")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,23 +83,21 @@ public class FilmControllerTest {
 
     @Test
     void testUpdateFilm() throws Exception {
-        String filmJson = """
-                {
-                  "id": 1,
-                  "name": "nisi eiusmod",
-                  "description": "adipisicing",
-                  "releaseDate": "1967-03-25",
-                  "duration": 100
-                }""";
+        String filmJson = "{\n" +
+                "  \"id\": \"1\",\n" +
+                "  \"name\": \"nisi eiusmod\",\n" +
+                "  \"description\": \"adipisicing\",\n" +
+                "  \"releaseDate\": \"1967-03-25\",\n" +
+                "  \"duration\": 100\n" +
+                "}";
 
-        String filmJsonUpdate = """
-                {
-                  "id": 1,
-                  "name": "nisi eiusmod",
-                  "description": "adipisicing",
-                  "releaseDate": "1967-03-26",
-                  "duration": 100
-                }""";
+        String filmJsonUpdate = "{\n" +
+                "  \"id\": \"1\",\n" +
+                "  \"name\": \"nisi eiusmod\",\n" +
+                "  \"description\": \"adipisicing\",\n" +
+                "  \"releaseDate\": \"1967-03-26\",\n" +
+                "  \"duration\": 100\n" +
+                "}";
 
         mockMvc.perform(post("/films")
                         .contentType(MediaType.APPLICATION_JSON)

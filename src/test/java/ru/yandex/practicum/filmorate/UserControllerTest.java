@@ -22,14 +22,13 @@ public class UserControllerTest {
 
     @Test
     void testCreateUser() throws Exception {
-        String userJson = """
-                {
-                    "id": 1,
-                    "email": "Halie59@yahoo.com",
-                    "login": "P7CzhChZFQ",
-                    "name": "Irma Daugherty",
-                    "birthday": "1995-12-23"
-                }""";
+        String userJson = "{\n" +
+                "    \"id\": 14,\n" +
+                "    \"email\": \"Heather80@hotmail.com\",\n" +
+                "    \"login\": \"Xnd2IpJ5Ig\",\n" +
+                "    \"name\": \"Belinda Kling\",\n" +
+                "    \"birthday\": \"1963-02-18\"\n" +
+                "}";
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -39,14 +38,13 @@ public class UserControllerTest {
 
     @Test
     void testCreateUserFailLogin() throws Exception {
-        String userJson = """
-                {
-                "id": 1,
-                 "email": "Halie59@yahoo.com",
-                 "login": "",
-                 "name": "Irma Daugherty",
-                 "birthday": "1995-12-23"
-                }""";
+        String userJson = "{\n" +
+                "    \"id\": 14,\n" +
+                "    \"email\": \"Heather80@hotmail.com\",\n" +
+                "    \"login\": \"\",\n" +
+                "    \"name\": \"Belinda Kling\",\n" +
+                "    \"birthday\": \"1963-02-18\"\n" +
+                "}";
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -56,14 +54,13 @@ public class UserControllerTest {
 
     @Test
     void testCreateUserFailEmail() throws Exception {
-        String userJson = """
-                {
-                "id": 1,
-                 "email": "Halie59yahoo.com",
-                 "login": "sdfdsfsdf",
-                 "name": "Irma Daugherty",
-                 "birthday": "1995-12-23"
-                }""";
+        String userJson = "{\n" +
+                "    \"id\": 14,\n" +
+                "    \"email\": \"Heather80hotmail.com\",\n" +
+                "    \"login\": \"Xnd2IpJ5Ig\",\n" +
+                "    \"name\": \"Belinda Kling\",\n" +
+                "    \"birthday\": \"1963-02-18\"\n" +
+                "}";
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -73,14 +70,13 @@ public class UserControllerTest {
 
     @Test
     void testCreateUserFailBirthday() throws Exception {
-        String userJson = """
-                {
-                "id": 1,
-                 "email": "Halie59@yahoo.com",
-                 "login": "sdfdsfsdf",
-                 "name": "Irma Daugherty",
-                 "birthday": "2995-12-23"
-                }""";
+        String userJson = "{\n" +
+                "    \"id\": 14,\n" +
+                "    \"email\": \"Heather80@hotmail.com\",\n" +
+                "    \"login\": \"Xnd2IpJ5Ig\",\n" +
+                "    \"name\": \"Belinda Kling\",\n" +
+                "    \"birthday\": \"2963-02-18\"\n" +
+                "}";
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,23 +86,21 @@ public class UserControllerTest {
 
     @Test
     void testUpdateUser() throws Exception {
-        String userJson = """
-                {
-                "id": 1,
-                 "email": "Halie59@yahoo.com",
-                 "login": "P7CzhChZFQ",
-                 "name": "Irma Daugherty",
-                 "birthday": "1995-12-23"
-                }""";
+        String userJson = "{\n" +
+                "    \"id\": 14,\n" +
+                "    \"email\": \"Heather80@hotmail.com\",\n" +
+                "    \"login\": \"Xnd2IpJ5Ig\",\n" +
+                "    \"name\": \"Belinda Kling\",\n" +
+                "    \"birthday\": \"1963-02-18\"\n" +
+                "}";
 
-        String userJsonUpdate = """
-                {
-                "id": 1,
-                 "email": "Halie59@yahoo.com",
-                 "login": "P7CzhChZFQ",
-                 "name": "Irma Daugherty",
-                 "birthday": "1995-12-24"
-                }""";
+        String userJsonUpdate = "{\n" +
+                "    \"id\": 14,\n" +
+                "    \"email\": \"Heather80@hotmail.com\",\n" +
+                "    \"login\": \"Xnd2IpJ5Ig\",\n" +
+                "    \"name\": \"Belinda Kling\",\n" +
+                "    \"birthday\": \"1963-02-19\"\n" +
+                "}";
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
