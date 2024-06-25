@@ -40,7 +40,8 @@ public class UserControllerTest {
     @Test
     void testCreateUserFailLogin() throws Exception {
         String userJson = """
-                {"id": 1,
+                {
+                "id": 1,
                  "email": "Halie59@yahoo.com",
                  "login": "",
                  "name": "Irma Daugherty",
@@ -56,7 +57,8 @@ public class UserControllerTest {
     @Test
     void testCreateUserFailEmail() throws Exception {
         String userJson = """
-                {"id": 1,
+                {
+                "id": 1,
                  "email": "Halie59yahoo.com",
                  "login": "sdfdsfsdf",
                  "name": "Irma Daugherty",
@@ -72,7 +74,8 @@ public class UserControllerTest {
     @Test
     void testCreateUserFailBirthday() throws Exception {
         String userJson = """
-                {"id": 1,
+                {
+                "id": 1,
                  "email": "Halie59@yahoo.com",
                  "login": "sdfdsfsdf",
                  "name": "Irma Daugherty",
@@ -88,7 +91,8 @@ public class UserControllerTest {
     @Test
     void testUpdateUser() throws Exception {
         String userJson = """
-                {"id": 1,
+                {
+                "id": 1,
                  "email": "Halie59@yahoo.com",
                  "login": "P7CzhChZFQ",
                  "name": "Irma Daugherty",
@@ -96,7 +100,8 @@ public class UserControllerTest {
                 }""";
 
         String userJsonUpdate = """
-                {"id": 1,
+                {
+                "id": 1,
                  "email": "Halie59@yahoo.com",
                  "login": "P7CzhChZFQ",
                  "name": "Irma Daugherty",
