@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import ru.yandex.practicum.filmorate.annotation.FilmReleaseDate;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 /**
@@ -19,5 +20,5 @@ public class Film {
     @FilmReleaseDate
     LocalDate releaseDate;
     @Positive
-    int duration;
+    Duration duration;
 }

@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.utils.Check;
 
 import java.util.*;
 
@@ -22,10 +22,7 @@ public class UserController {
 
     @PostMapping
     public User postUser(@Valid @RequestBody User user) {
-        if (users.containsKey(user.getId())) {
-            log.warn("Пользователь с ID = {} уже существует", user.getId());
-            throw new ValidationException("Пользователь с таким ID уже существует.");
-        }
+        Check.CheckIDSet(user.getId(), users.keySet(), "Пользователь с таким ID уже существует");
         if (user.getId() == 0L)
             user.setId(setId());
         if (user.getName() == null) {
@@ -37,9 +34,8 @@ public class UserController {
     }
 
     @PutMapping
-    public User putFilm(@Valid @RequestBody User user) {
-        if (user.getId() == 0L || !users.containsKey(user.getId()))
-            throw new ValidationException("Неверный ID пользователя");
+    public User putUser(@Valid @RequestBody User user) {
+        Check.CheckIDUpdate(user.getId(), users.keySet(), "Неверный ID пользователя");
         users.put(user.getId(), user);
         log.info("Обновлен пользователь {} с ID = {}", user.getLogin(), user.getId());
         return user;
