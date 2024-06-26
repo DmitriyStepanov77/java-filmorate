@@ -22,7 +22,7 @@ public class UserController {
 
     @PostMapping
     public User postUser(@Valid @RequestBody User user) {
-        Check.CheckIDSet(user.getId(), users.keySet(), "Пользователь с таким ID уже существует");
+        Check.CheckIdSet(user.getId(), users.keySet(), "Пользователь с таким ID уже существует");
         if (user.getId() == 0L)
             user.setId(setId());
         if (user.getName() == null) {
@@ -35,7 +35,7 @@ public class UserController {
 
     @PutMapping
     public User putUser(@Valid @RequestBody User user) {
-        Check.CheckIDUpdate(user.getId(), users.keySet(), "Неверный ID пользователя");
+        Check.CheckIdUpdate(user.getId(), users.keySet(), "Неверный ID пользователя");
         users.put(user.getId(), user);
         log.info("Обновлен пользователь {} с ID = {}", user.getLogin(), user.getId());
         return user;
