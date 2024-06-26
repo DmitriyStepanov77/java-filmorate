@@ -22,7 +22,7 @@ public class FilmController {
 
     @PostMapping
     public Film postFilm(@Valid @RequestBody Film film) {
-        Check.CheckIdSet(film.getId(), films.keySet(), "Фильм с таким ID уже существует");
+        Check.checkIdSet(film.getId(), films.keySet(), "Фильм с таким ID уже существует");
         if (film.getId() == 0L)
             film.setId(setId());
         films.put(film.getId(), film);
@@ -32,7 +32,7 @@ public class FilmController {
 
     @PutMapping
     public Film putFilm(@Valid @RequestBody Film film) {
-        Check.CheckIdUpdate(film.getId(), films.keySet(), "Неверный ID фильма");
+        Check.checkIdUpdate(film.getId(), films.keySet(), "Неверный ID фильма");
         films.put(film.getId(), film);
         log.info("Обновлен фильм {} с ID = {}", film.getName(), film.getId());
         return film;
