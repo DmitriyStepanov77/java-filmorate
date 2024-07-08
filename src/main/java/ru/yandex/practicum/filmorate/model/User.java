@@ -4,15 +4,18 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class User {
-    long id;
+    private long id;
     @Email
-    String email;
+    private String email;
     @NotBlank
-    String login;
-    String name;
+    private String login;
+    private String name;
     @PastOrPresent
-    LocalDate birthday;
+    private LocalDate birthday;
+    private final Set<Long> friends = new HashSet<>();
 }
