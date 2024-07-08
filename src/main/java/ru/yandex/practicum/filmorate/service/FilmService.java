@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
@@ -14,6 +15,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class FilmService {
     private final InMemoryFilmStorage inMemoryFilmStorage;
+    @Autowired
     private final UserService userService;
 
     public Film addFilm(Film film) {

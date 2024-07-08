@@ -7,7 +7,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.yandex.practicum.filmorate.controller.FilmController;
-import ru.yandex.practicum.filmorate.controller.UserController;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,7 +18,7 @@ public class FilmControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserController userController;
+    private FilmController filmController;
 
     @Test
     void testCreateFilm() throws Exception {
