@@ -52,9 +52,6 @@ public class FilmService {
     }
 
     public Collection<Film> popular(long count) {
-        if (count == 0) {
-            count = 10;
-        }
         return inMemoryFilmStorage.getFilms().stream()
                 .filter(film -> film.getLikes() != null)
                 .sorted((film1, film2) -> Integer.compare(film2.getLikes().size(), film1.getLikes().size()))

@@ -25,12 +25,12 @@ public class FilmController {
     }
 
     @PostMapping
-    public Film postFilm(@Valid @RequestBody Film film) {
+    public Film createFilm(@Valid @RequestBody Film film) {
         return filmService.addFilm(film);
     }
 
     @PutMapping
-    public Film putFilm(@Valid @RequestBody Film film) {
+    public Film updateFilm(@Valid @RequestBody Film film) {
         return filmService.updateFilm(film);
     }
 
@@ -47,7 +47,7 @@ public class FilmController {
     }
 
     @GetMapping("/popular")
-    public Collection<Film> getPopular(@RequestParam long count) {
+    public Collection<Film> getPopular(@RequestParam(defaultValue = "10") long count) {
         return filmService.popular(count);
     }
 
