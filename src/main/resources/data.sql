@@ -1,9 +1,9 @@
-INSERT INTO Genre VALUES(1, '1');
-INSERT INTO Genre VALUES(2, '2');
-INSERT INTO Genre VALUES(3, '3');
-INSERT INTO Genre VALUES(4, '4');
-INSERT INTO Genre VALUES(5, '5');
-INSERT INTO Genre VALUES(6, '6');
+INSERT INTO Genre VALUES(1, 'Комедия');
+INSERT INTO Genre VALUES(2, 'Драма');
+INSERT INTO Genre VALUES(3, 'Мультфильм');
+INSERT INTO Genre VALUES(4, 'Триллер');
+INSERT INTO Genre VALUES(5, 'Документальный');
+INSERT INTO Genre VALUES(6, 'Боевик');
 
 INSERT INTO MPA VALUES(1, 'G');
 INSERT INTO MPA VALUES(2, 'PG');
