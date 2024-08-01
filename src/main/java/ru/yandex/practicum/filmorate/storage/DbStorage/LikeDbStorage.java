@@ -16,15 +16,15 @@ public class LikeDbStorage extends BaseDb<Long> {
         super(jdbc, (rs, rowNum) -> rs.getLong("User_ID"));
     }
 
-    public void addLike(Long film_id, Long user_id) {
-        update(INSERT_LIKE, film_id, user_id);
+    public void addLike(Long filmId, Long userId) {
+        update(INSERT_LIKE, filmId, userId);
     }
 
-    public void deleteLike(Long film_id, Long user_id) {
-        delete(DELETE_LIKE, film_id, user_id);
+    public void deleteLike(Long filmId, Long userId) {
+        delete(DELETE_LIKE, filmId, userId);
     }
 
-    public Collection<Long> getLikes(Long film_id) {
-        return findMany(SELECT_LIKES, film_id);
+    public Collection<Long> getLikes(Long filmId) {
+        return findMany(SELECT_LIKES, filmId);
     }
 }
