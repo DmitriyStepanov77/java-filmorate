@@ -18,15 +18,15 @@ public class FriendDbStorage extends BaseDb<Friend> {
         super(jdbc, mapper);
     }
 
-    public void addFriend(Long user_id, Long friend_id) {
-        update(INSERT_FRIEND, user_id, friend_id);
+    public void addFriend(Long userId, Long friendId) {
+        update(INSERT_FRIEND, userId, friendId);
     }
 
-    public void deleteFriend(Long user_id, Long friend_id) {
-        delete(DELETE_FRIEND, user_id, friend_id);
+    public void deleteFriend(Long userId, Long friendId) {
+        delete(DELETE_FRIEND, userId, friendId);
     }
 
-    public Collection<Friend> getFriends(Long user_id) {
-        return findMany(SELECT_FRIENDS, user_id);
+    public Collection<Friend> getFriends(Long userId) {
+        return findMany(SELECT_FRIENDS, userId);
     }
 }
