@@ -38,7 +38,7 @@ public class FilmStorageTest {
     @Test
     public void testAddAndGetFilm() {
         filmStorage.addFilm(film);
-        assertThat(filmStorage.getFilm(1).getName()).isEqualTo("Name1");
+        assertThat(filmStorage.getFilm(film.getId()).getName()).isEqualTo("Name1");
     }
 
     @Test

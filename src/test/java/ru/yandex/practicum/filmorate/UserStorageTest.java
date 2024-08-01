@@ -40,7 +40,7 @@ public class UserStorageTest {
     @Test
     public void testAddAndGetUser() {
         userStorage.addUser(user);
-        assertThat(userStorage.getUser(1).getName()).isEqualTo("Name1");
+        assertThat(userStorage.getUser(user.getId()).getName()).isEqualTo("Name1");
 
     }
 
