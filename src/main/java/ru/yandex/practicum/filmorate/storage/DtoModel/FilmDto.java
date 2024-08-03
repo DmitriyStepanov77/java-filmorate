@@ -1,26 +1,19 @@
-package ru.yandex.practicum.filmorate.model;
+package ru.yandex.practicum.filmorate.storage.DtoModel;
 
-import jakarta.validation.constraints.*;
 import lombok.Data;
-import ru.yandex.practicum.filmorate.annotation.FilmReleaseDate;
+import ru.yandex.practicum.filmorate.model.Genre;
+import ru.yandex.practicum.filmorate.model.MPA;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Film.
- */
 @Data
-public class Film {
+public class FilmDto {
     private long id;
-    @NotEmpty
     private String name;
-    @Size(min = 0, max = 200)
     private String description;
-    @FilmReleaseDate
     private LocalDate releaseDate;
-    @Positive
     private int duration;
     private Set<Long> likes = new HashSet<>();
     private Set<Genre> genres = new HashSet<>();

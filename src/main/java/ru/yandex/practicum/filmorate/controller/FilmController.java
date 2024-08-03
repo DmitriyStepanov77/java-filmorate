@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.practicum.filmorate.storage.DtoModel.FilmDto;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
 
@@ -15,39 +16,39 @@ public class FilmController {
     private final FilmService filmService;
 
     @GetMapping
-    public Collection<Film> getFilms() {
+    public Collection<FilmDto> getFilms() {
         return filmService.getFilms();
     }
 
     @GetMapping("/{filmId}")
-    public Film getFilm(@PathVariable long filmId) {
+    public FilmDto getFilm(@PathVariable long filmId) {
         return filmService.getFilm(filmId);
     }
 
     @PostMapping
-    public Film createFilm(@Valid @RequestBody Film film) {
+    public FilmDto createFilm(@Valid @RequestBody Film film) {
         return filmService.addFilm(film);
     }
 
     @PutMapping
-    public Film updateFilm(@Valid @RequestBody Film film) {
+    public FilmDto updateFilm(@Valid @RequestBody Film film) {
         return filmService.updateFilm(film);
     }
 
     @PutMapping("/{filmId}/like/{userId}")
-    public Film setLike(@PathVariable long filmId,
-                        @PathVariable long userId) {
+    public FilmDto setLike(@PathVariable long filmId,
+                           @PathVariable long userId) {
         return filmService.addLike(filmId, userId);
     }
 
     @DeleteMapping("/{filmId}/like/{userId}")
-    public Film deleteLike(@PathVariable long filmId,
-                           @PathVariable long userId) {
+    public FilmDto deleteLike(@PathVariable long filmId,
+                              @PathVariable long userId) {
         return filmService.deleteLike(filmId, userId);
     }
 
     @GetMapping("/popular")
-    public Collection<Film> getPopular(@RequestParam(defaultValue = "10") long count) {
+    public Collection<FilmDto> getPopular(@RequestParam(defaultValue = "10") long count) {
         return filmService.popular(count);
     }
 
