@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.storage.DbStorage;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,6 +16,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 
+@Log4j2
 @Repository
 public class FilmDbStorage extends BaseDb<Film> implements FilmStorage {
     private static final String INSERT_FILM = "INSERT INTO Films(Name, " +
@@ -68,7 +70,6 @@ public class FilmDbStorage extends BaseDb<Film> implements FilmStorage {
     @Override
     public Film updateFilm(Film film) {
         checkGenreAndMpa(film);
-        getFilm(film.getId()); //Проверяем, существует ли обновляемый фильм
         update(UPDATE_FILM, film.getName(),
                 film.getDescription(),
                 film.getReleaseDate(),
@@ -86,8 +87,10 @@ public class FilmDbStorage extends BaseDb<Film> implements FilmStorage {
             film.setLikes(new HashSet<>(likeDbStorage.getLikes(film.getId())));
             film.setGenres(new HashSet<>(jdbc.query(SELECT_GENRES_FILMS, new GenreRowMapper(), film.getId())));
             return film;
-        } else
-            throw new NotFoundException("Фильм с данным ID не найден");
+        } else {
+            log.error("Фильм с ID = " + id + " не найден");
+            throw new NotFoundException("Фильм с ID = " + id + " не найден");
+        }
     }
 
     @Override
@@ -107,6 +110,7 @@ public class FilmDbStorage extends BaseDb<Film> implements FilmStorage {
                 genreDbStorage.getGenre(g.getId());
             }
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw new ValidationException(e.getMessage());
         }
     }

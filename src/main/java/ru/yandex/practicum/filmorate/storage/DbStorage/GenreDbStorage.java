@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.storage.DbStorage;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import ru.yandex.practicum.filmorate.model.Genre;
 import java.util.Collection;
 import java.util.Optional;
 
+@Log4j2
 @Repository
 public class GenreDbStorage extends BaseDb<Genre> {
     private static final String SELECT_GENRE = "SELECT * FROM Genre WHERE Genre_ID = ?";
@@ -22,8 +24,10 @@ public class GenreDbStorage extends BaseDb<Genre> {
         Optional<Genre> genre = findOne(SELECT_GENRE, id);
         if (genre.isPresent())
             return genre.get();
-        else
-            throw new NotFoundException("Жанр с данным ID не найден");
+        else {
+            log.error("Жанр с ID = " + id + " не найден");
+            throw new NotFoundException("Жанр с ID = " + id + " не найден");
+        }
     }
 
     public Collection<Genre> getGenres() {

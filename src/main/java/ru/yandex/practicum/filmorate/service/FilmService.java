@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.storage.DbStorage.LikeDbStorage;
 import ru.yandex.practicum.filmorate.storage.DtoModel.FilmDto;
 import ru.yandex.practicum.filmorate.model.Film;
@@ -31,6 +32,7 @@ public class FilmService {
     }
 
     public FilmDto updateFilm(Film film) {
+        checkFilm(film.getId()); //Проверяем, существует ли обновляемый фильм
         return FilmDtoMapper.mapToFilmDTO(filmStorage.updateFilm(film));
     }
 
@@ -47,7 +49,8 @@ public class FilmService {
     }
 
     public FilmDto addLike(long filmId, long userId) {
-        userService.getUser(userId); //Проверяем, существует ли пользователь, поставивший лайк
+        userService.checkUser(userId); //Проверяем, существует ли пользователь, поставивший лайк
+        checkFilm(filmId); //Проверяем, существует ли фильм
         likeDbStorage.addLike(filmId, userId);
         log.info("Пользователь с ID = {} лайкнул фильм с ID = {}", userId, filmId);
         return FilmDtoMapper.mapToFilmDTO(filmStorage.getFilm(filmId));
@@ -55,7 +58,9 @@ public class FilmService {
 
 
     public FilmDto deleteLike(long filmId, long userId) {
-        userService.getUser(userId); //Проверяем, существует ли пользователь, удаливший лайк
+        if (!likeDbStorage.getLikes(filmId).contains(userId)) //Проверяем, существует ли лайк
+            throw new ValidationException("У фильма с ID = " + filmId +
+                    " отсутствует лайк от пользователя с ID = " + userId);
         likeDbStorage.deleteLike(filmId, userId);
         log.info("Пользователь с ID = {} удалил лайк фильму с ID = {}", userId, filmId);
         return FilmDtoMapper.mapToFilmDTO(filmStorage.getFilm(filmId));
@@ -68,5 +73,9 @@ public class FilmService {
                 .sorted((film1, film2) -> Integer.compare(film2.getLikes().size(), film1.getLikes().size()))
                 .limit(count)
                 .toList();
+    }
+
+    void checkFilm(Long filmId) {
+        filmStorage.getFilm(filmId);
     }
 }

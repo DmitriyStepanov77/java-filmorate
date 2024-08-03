@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.storage.DbStorage;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,6 +14,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 
+@Log4j2
 @Repository
 public class UserDbStorage extends BaseDb<User> implements UserStorage {
     private static final String INSERT_USER = "INSERT INTO Users(Login, " +
@@ -49,7 +51,6 @@ public class UserDbStorage extends BaseDb<User> implements UserStorage {
 
     @Override
     public User updateUser(User user) {
-        getUser(user.getId()); //Проверяем, существует ли обновляемый пользователь
         update(UPDATE_USER, user.getLogin(),
                 user.getEmail(),
                 user.getName(),
@@ -65,8 +66,10 @@ public class UserDbStorage extends BaseDb<User> implements UserStorage {
             User user = optionalUser.get();
             user.setFriends(new HashSet<>(friendDbStorage.getFriends(user.getId())));
             return user;
-        } else
-            throw new NotFoundException("Пользователь с данным ID не найден");
+        } else {
+            log.error("Пользователь с ID = " + id + " не найден");
+            throw new NotFoundException("Пользователь с ID = " + id + " не найден");
+        }
     }
 
     @Override

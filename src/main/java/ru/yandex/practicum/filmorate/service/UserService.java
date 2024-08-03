@@ -34,6 +34,7 @@ public class UserService {
     }
 
     public UserDto updateUser(User user) {
+        checkUser(user.getId()); //Проверяем, существует ли пользователь
         return UserDtoMapper.mapToUserDTO(userStorage.updateUser(user));
     }
 
@@ -42,22 +43,23 @@ public class UserService {
     }
 
     public UserDto addFriend(long userId, long friendId) {
-        checkUser(userId);
-        checkUser(friendId);
+        checkUser(userId); //Проверяем, существует ли пользователь
+        checkUser(friendId); //Проверяем, существует ли пользователь
         friendDbStorage.addFriend(userId, friendId);
         log.info("Пользователь с ID = {} добавил в друзья пользователя с ID = {}", userId, friendId);
         return UserDtoMapper.mapToUserDTO(userStorage.getUser(userId));
     }
 
     public UserDto deleteFriend(long userId, long friendId) {
-        checkUser(userId);
-        checkUser(friendId);
+        checkUser(userId); //Проверяем, существует ли пользователь
+        checkUser(friendId); //Проверяем, существует ли пользователь
         friendDbStorage.deleteFriend(userId, friendId);
         log.info("Пользователь с ID = {} удалил из друзей пользователя с ID = {}", userId, friendId);
         return UserDtoMapper.mapToUserDTO(userStorage.getUser(userId));
     }
 
     public Collection<UserDto> getFriends(long userId) {
+        checkUser(userId); //Проверяем, существует ли пользователь
         return userStorage.getUser(userId).getFriends().stream()
                 .map(Friend::getId)
                 .map(userStorage::getUser)
@@ -66,6 +68,8 @@ public class UserService {
     }
 
     public Collection<UserDto> getCommonFriends(long userId, long friendId) {
+        checkUser(userId); //Проверяем, существует ли пользователь
+        checkUser(friendId); //Проверяем, существует ли пользователь
         Set<Friend> userFriends = userStorage.getUser(userId).getFriends();
         return userFriends.stream()
                 .filter(userStorage.getUser(friendId).getFriends()::contains)
@@ -75,7 +79,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    private void checkUser(Long userId) {
+    void checkUser(Long userId) {
         userStorage.getUser(userId);
     }
 }
